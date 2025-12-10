@@ -4,6 +4,8 @@ import cors from 'cors';
 import { clerkMiddleware } from '@clerk/express'
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js"
+import workspaceRouter from './routes/workspaceRoutes.js';
+import { protect } from './middlewares/authMiddleware.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,6 +20,10 @@ app.use(clerkMiddleware())
 
  // Set up the "/api/inngest" (recommended) routes with the serve handler
 app.use("/api/inngest", serve({ client: inngest, functions }));
+
+//Routes 
+app.use("api/workspaces", protect, workspaceRouter);
+
 
 // Use requireAuth() to protect this route
 // If user isn't authenticated, requireAuth() will redirect back to the homepage
