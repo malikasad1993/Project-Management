@@ -9,11 +9,11 @@ import {useUser, SignIn, useAuth, CreateOrganization} from '@clerk/clerk-react'
 import { fetchWorkSpaces } from '../features/workspaceSlice'
 
 const Layout = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const { loading, workspaces } = useSelector((state) => state.workspace);
-    const dispatch = useDispatch();
-    const {user, isLoaded} = useUser();
-    const {getToken} = useAuth();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const { loading, workspaces } = useSelector((state) => state.workspace)
+    const dispatch = useDispatch()
+    const {user, isLoaded} = useUser()
+    const {getToken} = useAuth()
 
     // Initial load of theme
     useEffect(() => {
@@ -25,7 +25,7 @@ const Layout = () => {
         if(isLoaded && user && workspaces.length === 0){
             dispatch(fetchWorkSpaces({getToken}))
         }
-    },[user, isLoaded])
+    }, [user, isLoaded])
 
     if(!user){
         return(

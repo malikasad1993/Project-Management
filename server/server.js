@@ -22,7 +22,7 @@ app.use(clerkMiddleware())
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
 //Routes 
-app.use("api/workspaces", protect, workspaceRouter);
+app.use("/api/workspaces", protect, workspaceRouter);
 
 
 // Use requireAuth() to protect this route
